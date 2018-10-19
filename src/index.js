@@ -74,20 +74,18 @@ class Analyzer {
      * }]
      */
     parse(str = "") {
-        return new Promise((resolve, reject) => {
-            if (str.trim() === "") return resolve([]);
-            const result = this._analyzer.tokenize(str);
-            for (let i = 0; i < result.length; i++) {
-                result[i].verbose = {};
-                result[i].verbose.word_id = result[i].word_id;
-                result[i].verbose.word_type = result[i].word_type;
-                result[i].verbose.word_position = result[i].word_position;
-                delete result[i].word_id;
-                delete result[i].word_type;
-                delete result[i].word_position;
-            }
-            resolve(result);
-        });
+        if (str.trim() === "") return [];
+        const result = this._analyzer.tokenize(str);
+        for (let i = 0; i < result.length; i++) {
+            result[i].verbose = {};
+            result[i].verbose.word_id = result[i].word_id;
+            result[i].verbose.word_type = result[i].word_type;
+            result[i].verbose.word_position = result[i].word_position;
+            delete result[i].word_id;
+            delete result[i].word_type;
+            delete result[i].word_position;
+        }
+        return result;
     }
 }
 
